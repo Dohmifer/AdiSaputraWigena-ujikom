@@ -8,6 +8,11 @@ public class BoyController : MonoBehaviour
     private Rigidbody rb;
     private Animator anim;
 
+    public GameObject projectile;
+    public Transform spawnProjectile;
+    public float projectileSpeed = 5f;
+
+
 
 
     void Start()
@@ -20,22 +25,15 @@ public class BoyController : MonoBehaviour
     void Update()
     {
         MoveBase();
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Shoot();
+        }
     }
 
     public void MoveBase()
     {
-        // float moveHorizontal = Input.GetAxis("Horizontal");
-        // float move = rb.velocity.x;
-        // move = transform.Translate(transform.position.x * speed, transform.position.y, transform.position.z);
-        // float horizontal = Input.GetAxis("Horizontal");
-        // //float vertical = Input.GetAxis("Vertical");
-        // //float speed = 5.0f;
-        // transform.position = new Vector3(horizontal, 0) * speed * Time.deltaTime;
-
-        // if (horizontal >= 0)
-        // {
-        //     transform.position = new Vector3(horizontal, 0) * speed * Time.deltaTime;
-        // }
 
         float mHorizontal = Input.GetAxis("Horizontal");
         //Debug.Log(Input.GetAxis("Horizontal"));
@@ -44,6 +42,14 @@ public class BoyController : MonoBehaviour
 
         rb.velocity = move * speed;
 
+    }
+
+    void Shoot()
+    {
+        GameObject fire = Instantiate(projectile, spawnProjectile.position, Quaternion.identity); //instantiate summon
+        Rigidbody rBFire = fire.GetComponent<Rigidbody>();
+
+        rBFire.velocity = transform.forward * projectileSpeed * Time.deltaTime;
     }
 
 
