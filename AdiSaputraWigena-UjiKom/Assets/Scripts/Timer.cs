@@ -37,6 +37,7 @@ public class Timer : MonoBehaviour
         {
             // Jika waktu habis
             time = 0f;
+            Time.timeScale = 0;
             GameOver();
         }
     }
@@ -63,6 +64,7 @@ public class Timer : MonoBehaviour
         {
             gameOverText.text = "Game Over!";
             gameOverText.gameObject.SetActive(true);
+            tryAgain.gameObject.SetActive(true);
         }
 
         // Tambahkan logika lain seperti menghentikan game, memuat ulang scene, dll.
