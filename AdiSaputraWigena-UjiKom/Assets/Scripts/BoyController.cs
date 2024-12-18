@@ -65,8 +65,10 @@ public class BoyController : MonoBehaviour
         Rigidbody rBFire = fire.GetComponent<Rigidbody>();
 
         rBFire.velocity = transform.forward * projectileSpeed;
+        Destroy(projectile, 3);
     }
-
-
-
 }
+
+
+
+

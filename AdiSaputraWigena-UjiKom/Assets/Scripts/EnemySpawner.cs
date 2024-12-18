@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -8,31 +9,45 @@ public class EnemySpawner : MonoBehaviour
     // Array GameObject untuk prefabs enemy
     public GameObject[] enemyPrefabs;
 
-    // Jumlah enemy yang ingin di-spawn sekaligus
-    public int enemiesToSpawn = 1;
+    // Durasi minimum dan maksimum spawn (dalam detik)
+    public float minSpawnTime = 1f;
+    public float maxSpawnTime = 5f;
 
-    // Fungsi ini akan dipanggil dari Animation Event
-    void Update()
+    // Flag untuk mengontrol spawning
+    private bool isSpawning = true;
+
+    void Start()
     {
-        SpawnEnemies();
+        // Mulai coroutine untuk spawn musuh
+        StartCoroutine(SpawnEnemiesWithDelay());
     }
-    public void SpawnEnemies()
+
+    IEnumerator SpawnEnemiesWithDelay()
     {
-        // Memeriksa apakah spawnPoints dan enemyPrefabs memiliki elemen
+        while (isSpawning)
+        {
+            // Tunggu secara random antara minSpawnTime dan maxSpawnTime
+            float spawnDelay = Random.Range(minSpawnTime, maxSpawnTime);
+            yield return new WaitForSeconds(spawnDelay);
+
+            // Spawn musuh satu per satu di spawn point acak
+            SpawnEnemyAtRandomPoint();
+        }
+    }
+
+    void SpawnEnemyAtRandomPoint()
+    {
+        // Periksa apakah ada spawn points dan enemy prefabs
         if (spawnPoints.Length > 0 && enemyPrefabs.Length > 0)
         {
-            // Loop untuk spawn lebih dari satu enemy
-            for (int i = 0; i < enemiesToSpawn; i++)
-            {
-                // Pilih spawn point secara acak
-                Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            // Pilih spawn point secara acak
+            Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-                // Pilih prefab enemy secara acak
-                GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+            // Pilih prefab enemy secara acak
+            GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
 
-                // Spawn enemy pada spawn point
-                Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
-            }
+            // Spawn enemy pada spawn point
+            Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
         }
         else
         {
@@ -40,4 +55,9 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    // Method untuk menghentikan spawning jika diperlukan
+    public void StopSpawning()
+    {
+        isSpawning = false;
+    }
 }
