@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class EnemyDestroy : MonoBehaviour
 {
-    public int scoreValue = 1; // Nilai skor untuk setiap enemy
-    private ScoreManager scoreManager; // Referensi ke ScoreManager
+    public int scoreValue = 1;
+    private ScoreManager scoreManager;
 
     private void Start()
     {
-        // Cari ScoreManager di scene
+
         scoreManager = FindObjectOfType<ScoreManager>();
     }
 
@@ -15,13 +15,13 @@ public class EnemyDestroy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Projectile"))
         {
-            // Tambahkan skor melalui ScoreManager
+
             if (scoreManager != null)
             {
                 scoreManager.AddScore(scoreValue);
             }
 
-            // Hancurkan enemy dan projectile
+
             Destroy(gameObject);
             Destroy(collision.gameObject);
         }

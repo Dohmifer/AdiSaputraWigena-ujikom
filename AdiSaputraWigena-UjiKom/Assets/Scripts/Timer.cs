@@ -10,16 +10,16 @@ public class Timer : MonoBehaviour
     public TMP_Text gameOverText; // UI Text untuk menampilkan "Game Over"
     public float maxTime; // Waktu maksimum
     private float time; // Waktu yang berjalan
-    private bool startTimer; // Apakah timer sedang berjalan
+    private bool startTimer;
     public Button tryAgain;
 
     void Start()
     {
         tryAgain.gameObject.SetActive(false);
-        StartTimer(); // Mulai timer
+        StartTimer();
         if (gameOverText != null)
         {
-            gameOverText.gameObject.SetActive(false); // Sembunyikan teks Game Over di awal
+            gameOverText.gameObject.SetActive(false);
         }
     }
 
@@ -29,7 +29,7 @@ public class Timer : MonoBehaviour
 
         if (time > 0f)
         {
-            // Kurangi waktu setiap frame
+
             time -= Time.deltaTime;
             timeText.text = Mathf.CeilToInt(time).ToString();
         }

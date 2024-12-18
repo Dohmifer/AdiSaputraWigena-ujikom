@@ -18,7 +18,6 @@ public class MainmenuController : MonoBehaviour
     private void Start()
     {
         _play.onClick.AddListener(PlayButton);
-        //        _setting.onClick.AddListener(SettingButton);
         _controllerInfo.onClick.AddListener(ControllerInfoButton);
         _exit.onClick.AddListener(ExitButton);
     }
@@ -31,7 +30,6 @@ public class MainmenuController : MonoBehaviour
 
     private void SettingButton()
     {
-        // Load the settings scene
         SceneManager.LoadScene(_settingScene);
 
     }

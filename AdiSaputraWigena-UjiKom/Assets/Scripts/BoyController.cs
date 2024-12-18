@@ -26,7 +26,7 @@ public class BoyController : MonoBehaviour
     {
         MoveBase();
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Mouse0 ))
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Mouse0))
         {
             anim.SetBool("IsShoot", true);
             Shoot();
