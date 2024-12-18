@@ -26,7 +26,7 @@ public class BoyController : MonoBehaviour
     {
         MoveBase();
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Mouse0 ))
         {
             anim.SetBool("IsShoot", true);
             Shoot();
@@ -65,7 +65,7 @@ public class BoyController : MonoBehaviour
         Rigidbody rBFire = fire.GetComponent<Rigidbody>();
 
         rBFire.velocity = transform.forward * projectileSpeed;
-        Destroy(projectile, 3);
+        //Destroy(projectile, 3);
     }
 }
 

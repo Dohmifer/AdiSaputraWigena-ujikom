@@ -20,6 +20,7 @@ public class PauseResume : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) == true)
         {
             TogglePause();
+            mainMenu.gameObject.SetActive(true);
         }
 
     }
