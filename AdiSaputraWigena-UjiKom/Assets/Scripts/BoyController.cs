@@ -28,7 +28,12 @@ public class BoyController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            anim.SetBool("IsShoot", true);
             Shoot();
+        }
+        else
+        {
+            anim.SetBool("IsShoot", false);
         }
     }
 
@@ -36,11 +41,21 @@ public class BoyController : MonoBehaviour
     {
 
         float mHorizontal = Input.GetAxis("Horizontal");
+
         //Debug.Log(Input.GetAxis("Horizontal"));
 
         Vector2 move = new Vector2(mHorizontal, rb.velocity.y);
 
         rb.velocity = move * speed;
+
+        if (Input.GetButtonDown("Horizontal"))
+        {
+            anim.SetBool("IsMove", true);
+        }
+        else
+        {
+            anim.SetBool("IsMove", false);
+        }
 
     }
 
@@ -49,7 +64,7 @@ public class BoyController : MonoBehaviour
         GameObject fire = Instantiate(projectile, spawnProjectile.position, Quaternion.identity); //instantiate summon
         Rigidbody rBFire = fire.GetComponent<Rigidbody>();
 
-        rBFire.velocity = transform.forward * projectileSpeed * Time.deltaTime;
+        rBFire.velocity = transform.forward * projectileSpeed;
     }
 
 
